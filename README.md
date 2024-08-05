@@ -50,6 +50,7 @@ The server will start on `http://localhost:8080`.
 │   └── logger.go</br>
 └── models/</br>
 └── book.go</br>
+└── db.go</br>
 </P>
 
 - `main.go`: Entry point of the application, sets up routing and middleware
