@@ -26,7 +26,7 @@ This is a simple RESTful API for managing books, built with Go and the Gin web f
 ## Installation
 
 1. Clone the repository:
-https://github.com/Ayaneren0/book-api.git
+`https://github.com/Ayaneren0/book-api.git`
 
 2. Install dependencies:
 go mod tidy
@@ -42,14 +42,14 @@ The server will start on `http://localhost:8080`.
 - `DELETE /api`: Delete book by given ID
 
 ## Project Structure
-<P>book-api/
-├── main.go
-├── handlers/
-│   └── books.go
-├── middleware/
-│   └── logger.go
-└── models/
-└── book.go
+<P>book-api/</br>
+├── main.go</br>
+├── handlers/</br>
+│   └── books.go</br>
+├── middleware/</br>
+│   └── logger.go</br>
+└── models/</br>
+└── book.go</br>
 </P>
 
 - `main.go`: Entry point of the application, sets up routing and middleware
