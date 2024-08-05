@@ -28,7 +28,10 @@ This is a simple RESTful API for managing books, built with Go and the Gin web f
 1. Clone the repository:
 `https://github.com/Ayaneren0/book-api.git`
 
-2. Install dependencies:
+2. In db.go change username and password for database.
+`dsn:="username:password@tcp(127.0.0.1:3306)/library?charset=utf8mb4&parseTime=true&loc=Local"`
+
+3. Install dependencies:
 go mod tidy
 
 The server will start on `http://localhost:8080`.
