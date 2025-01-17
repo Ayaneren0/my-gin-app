@@ -7,6 +7,7 @@ import (
 	"bookstore/internal/repository"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
 )
@@ -42,5 +43,9 @@ func main() {
 	router.HandleFunc("/api/books/{id}", middleware.AuthMiddleware(bookHandler.DeleteBook)).Methods("DELETE")
 
 	// Start server
-	log.Fatal(http.ListenAndServe(":8080", router))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default port if not set
+	}
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
