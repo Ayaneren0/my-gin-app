@@ -35,13 +35,49 @@ func (h *BookHandler) CreateBook(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *BookHandler) GetBooks(w http.ResponseWriter, r *http.Request) {
-	books, err := h.bookRepo.GetAll()
+	query := &models.PaginationQuery{
+		Page:     1,
+		PageSize: 10,
+	}
+
+	// Parse query parameters
+	if page := r.URL.Query().Get("page"); page != "" {
+		if pageNum, err := strconv.Atoi(page); err == nil && pageNum > 0 {
+			query.Page = pageNum
+		}
+	}
+
+	if pageSize := r.URL.Query().Get("page_size"); pageSize != "" {
+		if size, err := strconv.Atoi(pageSize); err == nil && size > 0 {
+			query.PageSize = size
+		}
+	}
+
+	query.Search = r.URL.Query().Get("search")
+	query.SortBy = r.URL.Query().Get("sort_by")
+	query.SortDir = r.URL.Query().Get("sort_dir")
+	query.Author = r.URL.Query().Get("author")
+
+	if minPrice := r.URL.Query().Get("min_price"); minPrice != "" {
+		if price, err := strconv.ParseFloat(minPrice, 64); err == nil {
+			query.MinPrice = price
+		}
+	}
+
+	if maxPrice := r.URL.Query().Get("max_price"); maxPrice != "" {
+		if price, err := strconv.ParseFloat(maxPrice, 64); err == nil {
+			query.MaxPrice = price
+		}
+	}
+
+	result, err := h.bookRepo.GetAllWithFilters(query)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	json.NewEncoder(w).Encode(books)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(result)
 }
 
 func (h *BookHandler) GetBook(w http.ResponseWriter, r *http.Request) {
