@@ -19,7 +19,7 @@
 
 # Golang Bookstore Management API
 
-A RESTful API for managing a bookstore, built with Go, MySQL, and JWT authentication. This project implements the repository pattern and includes features like pagination, filtering, and search capabilities.
+A robust and scalable RESTful API built with Go for managing bookstore operations. This project implements a modern, secure, and efficient backend system utilizing MySQL for data persistence and JWT for authentication. The API follows clean architecture principles with the repository pattern, making it maintainable and extensible.
 
 ## Features
 
